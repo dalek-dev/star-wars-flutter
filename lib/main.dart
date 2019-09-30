@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba/pages/first_page.dart';
+import 'package:prueba/pages/people_details.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: FirstPage(),
+      initialRoute: '/',
+      routes: {
+        '/'       : ( BuildContext context ) =>   FirstPage(),
+        'detalle' : ( BuildContext context ) =>   PeopleDetails(),
+      },
     );
   }
 }

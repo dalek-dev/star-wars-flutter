@@ -1,7 +1,8 @@
 # Proyecto de Prueba
 
 Aplicación en Flutter que consume una API de Star wars : 'https://swapi.co/api':
-s
+
+
 ![test](./assets/gif/starwars.gif)
 
 ## Getting Started

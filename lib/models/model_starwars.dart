@@ -1,22 +1,6 @@
-class StarWars {
-  final int count;
-  final String next;
-  final int previous;
-  final List<StarWarsModel> results;
+import 'dart:async';
 
-  StarWars({this.count, this.next, this.previous, this.results});
-
-  factory StarWars.fromJson(Map<String, dynamic> json) {
-    return new StarWars(
-      count: json['count'],
-      next: json['next'],
-      previous: json['previous'],
-      results: (json['results'] as List)
-          .map((e) => StarWarsModel.fromJson(e))
-          .toList(),
-    );
-  }
-}
+enum StarWarsLoadMoreStatus { LOADING, STABLE }
 
 class StarWarsModel{
   String name;
@@ -77,4 +61,38 @@ class StarWarsModel{
     edited      : json['edited'],
     url         : json['url']
   );
+}
+class StarWars {
+
+  StarWars({this.count, this.next, this.previous, this.results});
+
+  final int count;
+  final String next;
+  final int previous;
+  final List<StarWarsModel> results;
+
+
+  StarWars.fromMap(Map<String, dynamic> json)
+      : count     = json['count'],
+        next      = json['next'],
+        previous  = json['previous'],
+        results  = List<StarWarsModel>.from(
+            json['results'].map((sw) => StarWarsModel.fromJson(sw)));
+
+
+}
+
+abstract class StarWarsRepository {
+  Future<StarWars> fetchStarWars(int pageNumber);
+}
+
+class FetchStarWarsException implements Exception {
+  final _message;
+
+  FetchStarWarsException([this._message]);
+
+  String toString() {
+    if (_message == null) return "Exception";
+    return "Exception : $_message";
+  }
 }
